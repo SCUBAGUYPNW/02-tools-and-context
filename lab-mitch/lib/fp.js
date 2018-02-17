@@ -3,20 +3,59 @@
 // .filter - takes all the elements in a list and returns a new list filtered down to only elements that pass some test defined by the callback function.
 // .reduce - takes all the elements in a list and reduces them down to a single value, starting from some initial value.
 
-let arr = [12, 23, 43, 67, 39, 52]
 
-const doubleEach = (n) => {return 2 * n}
+'use strict';
 
-function mapDemo(arr, cb) {
-    let mapResult = []
-    for (let i = 0; i < arr.length; i++) {
-        let singleElement = arr[i];
-        let result = cb(singleElement);
-        mapResult.push(result);
+const forEach = (array, cb) => {
+  for (let i = 0; i < array.length; i++) {
+    cb(array[i]);
+  }
+  // return array.forEach(doubler);
+}//this is how .forEach is implemented
+const map = (array, cb) => {
+  let results = [];
+  for (let i = 0; i < array.length; i++) {
+    let element = array[i];
+    let result = cb(element);
+    results.push(result);
+  }
+  return results;
+}//this is how .map is implemented
+// console.log(array.map(doubler));
+const filter = (array, cb) => {
+  let results = [];
+  for (let i = 0; i < array.length; i++) {
+    let element = array[i];
+    let result = cb(element);
+    if(result) {
+      results.push(element);
+    }   
+  }
+  return results;
+}//this is how .filter is implemented
+// console.log(array.filter(isEven));
+
+const reduce = (array, cb, initialValue) => {
+    let result = initialValue;
+    for (let i = 0; i < array.length; i++) {
+        result = cb.call(undefined, result, array[i], i, array);
     }
-    return mapResult;
+    return result;
 }
-console.log(mapDemo(arr, doubleEach));
+//   function reduce(array, cb, initialValue) {
+//     let result = initialValue;
+//     for (let i = 0; i < array.length; i += 1) {
+//       result = cb.call(undefined, result, array[i], i, array);
+//     }
+//     return result;
+//   }
+
+//this is how .reduce is implemented
+// console.log(array.reduce(doubler));
 
 module.exports = {};
-module.exports.mapDemo = mapDemo;
+module.exports.forEach = forEach;
+module.exports.map = map;
+module.exports.filter = filter;
+module.exports.reduce = reduce;
+
