@@ -1,10 +1,13 @@
 'use strict';
 
 const forEach = require('../lib/fp.js').forEach;
+
 //this line connects to the other file and "picks off" the function containsVowels
+
 const doubler = (n) => {return n * 2};
 const isEven = (n) => {return n % 2 === 0};
 let array = [5, 16, 22, 7, 12, 8, 33];
+
 describe("forEach function", () => {
   it('it should return undefined since it is not actually defining anything, only runs through the function', () => {
     let result = forEach(array, doubler);
